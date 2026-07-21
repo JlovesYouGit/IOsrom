@@ -4,14 +4,14 @@ import subprocess
 import plistlib
 import zipfile
 from pathlib import Path
+from utils import PathConfig, run_command
 
 def get_device_info():
     """Get device-specific info"""
-    chargfast_dir = Path("N:/ROMLOADDER/chargfast via usb")
-    irecovery = chargfast_dir / "irecovery.exe"
+    config = PathConfig()
+    irecovery = config.irecovery()
     
-    result = subprocess.run([str(irecovery), "-q"], 
-                           capture_output=True, text=True, cwd=str(chargfast_dir))
+    result = run_command([str(irecovery), "-q"], cwd=config.chargfast_dir, timeout=10)
     
     info = {}
     for line in result.stdout.split('\n'):
@@ -28,10 +28,10 @@ def get_device_info():
 
 def prepare_custom_ipsw(device_info):
     """Prepare IPSW with device-specific values"""
-    base_dir = Path("N:/ROMLOADDER")
-    ipsw = base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
-    custom_ipsw = base_dir / "iPad1,1_Custom_Ready.ipsw"
-    work_dir = base_dir / "custom_work"
+    config = PathConfig()
+    ipsw = config.ipsw("iPad1,1_4.3.3_8J3_Restore.ipsw")
+    custom_ipsw = config.base_dir / "iPad1,1_Custom_Ready.ipsw"
+    work_dir = config.base_dir / "custom_work"
     
     work_dir.mkdir(exist_ok=True)
     
@@ -87,20 +87,20 @@ def prepare_custom_ipsw(device_info):
 
 def flash_custom_ipsw(custom_ipsw, device_info):
     """Flash the prepared IPSW"""
-    chargfast_dir = Path("N:/ROMLOADDER/chargfast via usb")
-    idevicerestore = chargfast_dir / "idevicerestore.exe"
+    config = PathConfig()
+    idevicerestore = config.idevicerestore()
     
     print(f"[+] Flashing custom IPSW for {device_info['Model']}...")
     
     # Use idevicerestore with custom IPSW
-    result = subprocess.run([
+    result = run_command([
         str(idevicerestore),
         "--custom",
         "--erase",
         "--no-input",
-        "-i", device_info['ECID'],  # Target specific ECID
+        "-i", device_info['ECID'],
         str(custom_ipsw)
-    ], cwd=str(chargfast_dir))
+    ], cwd=config.chargfast_dir, timeout=300)
     
     return result.returncode == 0
 

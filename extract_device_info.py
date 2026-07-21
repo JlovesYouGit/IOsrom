@@ -3,6 +3,7 @@
 import subprocess
 import sys
 import re
+from utils import validate_hex
 
 def get_device_info():
     """Extract device info from connected iPad"""
@@ -28,10 +29,14 @@ def get_device_info():
         chip_id = input("Enter Chip ID (e.g. 0x8930): ").strip()
         model = input("Enter Model (e.g. iPad1,1): ").strip()
         
-        # Clean up inputs - remove colons and extra spaces
-        ecid = ecid.replace(':', '').strip()
-        board_id = board_id.replace(':', '').strip()
-        chip_id = chip_id.replace(':', '').strip()
+        # Validate inputs
+        try:
+            ecid = validate_hex(ecid.replace(':', '').strip())
+            board_id = validate_hex(board_id.replace(':', '').strip())
+            chip_id = validate_hex(chip_id.replace(':', '').strip())
+        except ValueError as e:
+            print(f"[!] Invalid input: {e}")
+            return None
         
         if not all([ecid, board_id, chip_id, model]):
             print("[!] All fields required")

@@ -2,6 +2,9 @@
 """Bypass iTunes server checks completely"""
 import os
 import subprocess
+import shutil
+from pathlib import Path
+from utils import backup_file, run_command
 
 def block_apple_servers():
     """Block all Apple servers in hosts file"""
@@ -92,10 +95,9 @@ def patch_itunes_binary():
     
     # Create patched version (backup original)
     backup_exe = itunes_exe + ".backup"
-    if not os.path.exists(backup_exe):
+    if not Path(backup_exe).exists():
         try:
-            import shutil
-            shutil.copy2(itunes_exe, backup_exe)
+            backup_file(Path(itunes_exe))
             print("[+] iTunes backed up")
         except Exception as e:
             print(f"[!] Backup failed: {e}")
@@ -114,10 +116,16 @@ def patch_itunes_binary():
         ]
         
         patched_data = data
+        patch_count = 0
         for original, replacement in patches:
             if original in patched_data:
                 patched_data = patched_data.replace(original, replacement)
                 print(f"[+] Patched: {original}")
+                patch_count += 1
+        
+        if patch_count == 0:
+            print("[!] No patchable patterns found - binary may have changed")
+            return False
         
         # Write patched version
         with open(itunes_exe, 'wb') as f:
@@ -126,6 +134,9 @@ def patch_itunes_binary():
         print("[✅] iTunes patched to bypass servers")
         return True
         
+    except PermissionError:
+        print("[!] Permission denied - run as Administrator")
+        return False
     except Exception as e:
         print(f"[!] iTunes patching failed: {e}")
         return False
