@@ -4,6 +4,8 @@ import os
 import sys
 import subprocess
 
+cfg = PathConfig()
+
 def launch_sn0wbreeze_direct():
     """Launch sn0wbreeze directly"""
     sn0wbreeze_path = r"N:\ROMLOADDER\Snowbreeze\sn0wbreeze-v2.9.14\sn0wbreezedl-master\sn0wbreeze-v2.9.14.exe"

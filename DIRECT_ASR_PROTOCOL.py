@@ -3,12 +3,16 @@ import socket
 import struct
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
 # Boot device to restore ramdisk first
 import subprocess
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
-irecovery = chargfast / "irecovery.exe"
+irecovery = cfg.resolve_irecovery()
+
+cfg = PathConfig()
 
 def run(cmd):
     subprocess.run([str(irecovery), "-c", cmd], cwd=str(chargfast), capture_output=True)

@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import subprocess
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
-irecovery = chargfast / "irecovery.exe"
+irecovery = cfg.resolve_irecovery()
 
 print("[!] The kernel is encrypted and won't boot")
 print("[!] You need to:")

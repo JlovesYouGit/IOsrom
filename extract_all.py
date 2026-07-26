@@ -6,6 +6,8 @@ from img3tool import IMG3Tool
 from ipsw_tool import IPSWTool
 from lzss_tool import decompress_lzss
 
+cfg = PathConfig()
+
 def extract_firmware(ipsw_path, output_dir):
     """Complete firmware extraction pipeline"""
     os.makedirs(output_dir, exist_ok=True)

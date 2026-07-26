@@ -4,12 +4,16 @@ import subprocess
 import struct
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def direct_nand_flash():
     """Flash directly to NAND bypassing all tools"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("🔥 DIRECT NAND FLASHER")
     print("=" * 25)
@@ -73,9 +77,9 @@ def direct_nand_flash():
 
 def raw_usb_flash():
     """Raw USB flash method"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("\n🔥 RAW USB FLASH METHOD")
     print("=" * 30)

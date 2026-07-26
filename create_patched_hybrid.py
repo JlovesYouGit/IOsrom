@@ -9,6 +9,8 @@ from img3tool import IMG3Tool
 from lzss_tool import decompress_lzss
 from kernelcache_a4_patcher import KernelPatcher
 
+cfg = PathConfig()
+
 def create_patched_hybrid(ipad1_ipsw, ipad2_ipsw, output_ipsw):
     """Create hybrid with A4-patched kernelcache"""
     temp_base = "temp_base"
@@ -155,7 +157,7 @@ def create_patched_hybrid(ipad1_ipsw, ipad2_ipsw, output_ipsw):
                     time.sleep(1)
                     try:
                         shutil.rmtree(temp_dir)
-                    except:
+                    except Exception as e:
                         print(f"[!] Could not cleanup {temp_dir}")
                         pass
 

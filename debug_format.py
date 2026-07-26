@@ -2,6 +2,8 @@
 import os
 import sys
 
+cfg = PathConfig()
+
 def analyze_file(filepath):
     """Analyze file format"""
     if not os.path.exists(filepath):

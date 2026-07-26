@@ -2,6 +2,8 @@
 import struct
 import sys
 
+cfg = PathConfig()
+
 def patch_devicetree(dt_path):
     try:
         with open(dt_path, 'rb') as f:

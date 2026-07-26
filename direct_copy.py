@@ -3,6 +3,8 @@
 import shutil
 import sys
 
+cfg = PathConfig()
+
 def direct_copy(source, target):
     """Direct file copy"""
     try:

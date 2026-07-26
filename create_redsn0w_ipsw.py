@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def create_redsn0w_ipsw(base_ipsw, output_ipsw):
     """Create IPSW that redsn0w can recognize"""
     temp_dir = "temp_redsn0w"

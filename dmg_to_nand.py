@@ -5,6 +5,10 @@ import struct
 import zlib
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def extract_dmg_data(dmg_path):
     """Extract raw data from DMG"""
@@ -25,8 +29,8 @@ def extract_dmg_data(dmg_path):
 
 def write_to_nand_blocks(data, start_block=0x800000):
     """Write data to NAND in blocks"""
-    chargfast_dir = Path("N:/ROMLOADDER/chargfast via usb")
-    irecovery = chargfast_dir / "irecovery.exe"
+    chargfast_dir = Path(str(Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER")) / "chargfast via usb"))
+    irecovery = cfg.resolve_irecovery()
     
     print(f"[+] Writing {len(data)} bytes to NAND at 0x{start_block:x}")
     
@@ -77,8 +81,8 @@ def write_to_nand_blocks(data, start_block=0x800000):
 
 def full_nand_restore():
     """Complete NAND restore with filesystem"""
-    chargfast_dir = Path("N:/ROMLOADDER/chargfast via usb")
-    irecovery = chargfast_dir / "irecovery.exe"
+    chargfast_dir = Path(str(Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER")) / "chargfast via usb"))
+    irecovery = cfg.resolve_irecovery()
     
     print("DMG TO NAND WRITER")
     print("=" * 30)

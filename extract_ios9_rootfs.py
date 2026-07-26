@@ -4,6 +4,8 @@ import os
 import zipfile
 import shutil
 
+cfg = PathConfig()
+
 def extract_rootfs():
     """Extract iOS 9 rootfs from IPSW"""
     ios9_ipsw = "iPad2,1_9.3.5_13G36_Restore.ipsw"

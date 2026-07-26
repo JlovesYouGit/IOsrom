@@ -5,6 +5,8 @@ import sys
 import re
 from utils import validate_hex
 
+cfg = PathConfig()
+
 def get_device_info():
     """Extract device info from connected iPad"""
     try:

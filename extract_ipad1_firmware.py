@@ -3,11 +3,15 @@
 import zipfile
 import os
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def extract_ipad1_firmware():
     """Extract iPad1,1 k48ap components"""
-    ipsw_path = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
-    extract_dir = Path("N:/ROMLOADDER/chargfast via usb/extracted")
+    ipsw_path = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
+    extract_dir = cfg.base_dir / "chargfast via usb/extracted"
     
     if extract_dir.exists():
         import shutil

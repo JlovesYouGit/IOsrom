@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """Electrical warfare - control device through voltage manipulation"""
+import os
 import subprocess
 import time
 import struct
 from pathlib import Path
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def electrical_domination():
     """Control device through electrical signals and voltage manipulation"""
-    base_dir = Path("N:/ROMLOADDER")
-    chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    base_dir = cfg.base_dir
+    chargfast_dir = cfg.chargfast_dir
+    irecovery = cfg.resolve_irecovery()
     
     print("⚡ ELECTRICAL WARFARE")
     print("VOLTAGE MANIPULATION & ELECTRICAL SIGNAL CONTROL")
@@ -30,16 +34,34 @@ def electrical_domination():
     
     try:
         # Basic USB connection
-        subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBSS.k48ap.RELEASE.dfu"], 
+        result = subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBSS.k48ap.RELEASE.dfu"], 
                       cwd=str(chargfast_dir), timeout=10)
-        subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBSS load failed with return code {result.returncode}")
+            return
+        result = subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBSS go failed with return code {result.returncode}")
+            return
         time.sleep(2)
         
-        subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBEC.k48ap.RELEASE.dfu"], 
+        result = subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBEC.k48ap.RELEASE.dfu"], 
                       cwd=str(chargfast_dir), timeout=10)
-        subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBEC load failed with return code {result.returncode}")
+            return
+        result = subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBEC go failed with return code {result.returncode}")
+            return
         time.sleep(2)
         
+    except subprocess.TimeoutExpired as e:
+        print(f"[-] Basic control timeout: {e}")
+        print("[+] Proceeding with electrical override...")
+    except FileNotFoundError as e:
+        print(f"[-] irecovery not found: {e}")
+        print("[+] Proceeding with electrical override...")
     except Exception as e:
         print(f"[-] Basic control failed: {e}")
         print("[+] Proceeding with electrical override...")
@@ -65,10 +87,16 @@ def electrical_domination():
     for attack in voltage_attacks:
         print(f"[+] VOLTAGE ATTACK: {attack}")
         try:
-            subprocess.run([str(irecovery), "-c", attack], cwd=str(chargfast_dir), timeout=5)
+            result = subprocess.run([str(irecovery), "-c", attack], cwd=str(chargfast_dir), timeout=5)
+            if result.returncode != 0:
+                print(f"    [-] Command failed: {attack}")
             time.sleep(0.1)  # Brief pulse
-        except:
-            pass
+        except subprocess.TimeoutExpired:
+            print(f"    [-] Command timeout: {attack}")
+        except FileNotFoundError:
+            print(f"    [-] irecovery not found")
+        except Exception as e:
+            print(f"    [-] Error: {e}")
     
     print("[+] STAGE 3: ELECTRICAL SIGNAL INJECTION")
     
@@ -95,10 +123,16 @@ def electrical_domination():
     for pattern in signal_patterns:
         print(f"[+] SIGNAL INJECT: {pattern}")
         try:
-            subprocess.run([str(irecovery), "-c", pattern], cwd=str(chargfast_dir), timeout=3)
+            result = subprocess.run([str(irecovery), "-c", pattern], cwd=str(chargfast_dir), timeout=3)
+            if result.returncode != 0:
+                print(f"    [-] Command failed: {pattern}")
             time.sleep(0.05)  # Rapid fire
-        except:
-            pass
+        except subprocess.TimeoutExpired:
+            print(f"    [-] Command timeout: {pattern}")
+        except FileNotFoundError:
+            print(f"    [-] irecovery not found")
+        except Exception as e:
+            print(f"    [-] Error: {e}")
     
     print("[+] STAGE 4: ELECTROMAGNETIC PULSE SIMULATION")
     
@@ -113,9 +147,15 @@ def electrical_domination():
     print("[+] EMP SIMULATION - 100 RAPID VOLTAGE PULSES")
     for pulse in emp_sequence:
         try:
-            subprocess.run([str(irecovery), "-c", pulse], cwd=str(chargfast_dir), timeout=1)
-        except:
-            pass
+            result = subprocess.run([str(irecovery), "-c", pulse], cwd=str(chargfast_dir), timeout=1)
+            if result.returncode != 0:
+                print(f"    [-] EMP pulse failed")
+        except subprocess.TimeoutExpired:
+            print(f"    [-] EMP pulse timeout")
+        except FileNotFoundError:
+            print(f"    [-] irecovery not found")
+        except Exception as e:
+            print(f"    [-] Error: {e}")
     
     print("[+] STAGE 5: FREQUENCY INJECTION")
     
@@ -130,11 +170,17 @@ def electrical_domination():
     for addr, freq, desc in frequencies:
         print(f"[+] FREQUENCY INJECT: {desc}")
         try:
-            subprocess.run([str(irecovery), "-c", f"mw 0x{addr:08x} 0x{freq:08x}"], 
+            result = subprocess.run([str(irecovery), "-c", f"mw 0x{addr:08x} 0x{freq:08x}"], 
                           cwd=str(chargfast_dir), timeout=3)
+            if result.returncode != 0:
+                print(f"    [-] Frequency inject failed: {desc}")
             time.sleep(0.1)
-        except:
-            pass
+        except subprocess.TimeoutExpired:
+            print(f"    [-] Frequency inject timeout: {desc}")
+        except FileNotFoundError:
+            print(f"    [-] irecovery not found")
+        except Exception as e:
+            print(f"    [-] Error: {e}")
     
     print("[+] STAGE 6: THERMAL MANIPULATION")
     
@@ -148,9 +194,15 @@ def electrical_domination():
     for attack in thermal_attacks:
         print(f"[+] THERMAL ATTACK: {attack}")
         try:
-            subprocess.run([str(irecovery), "-c", attack], cwd=str(chargfast_dir), timeout=3)
-        except:
-            pass
+            result = subprocess.run([str(irecovery), "-c", attack], cwd=str(chargfast_dir), timeout=3)
+            if result.returncode != 0:
+                print(f"    [-] Thermal attack failed: {attack}")
+        except subprocess.TimeoutExpired:
+            print(f"    [-] Thermal attack timeout: {attack}")
+        except FileNotFoundError:
+            print(f"    [-] irecovery not found")
+        except Exception as e:
+            print(f"    [-] Error: {e}")
     
     print("[+] STAGE 7: FINAL ELECTRICAL OVERRIDE")
     
@@ -172,10 +224,16 @@ def electrical_domination():
     for override in final_override:
         print(f"[+] FINAL OVERRIDE: {override}")
         try:
-            subprocess.run([str(irecovery), "-c", override], cwd=str(chargfast_dir), timeout=5)
+            result = subprocess.run([str(irecovery), "-c", override], cwd=str(chargfast_dir), timeout=5)
+            if result.returncode != 0:
+                print(f"    [-] Override failed: {override}")
             time.sleep(0.2)
-        except:
-            pass
+        except subprocess.TimeoutExpired:
+            print(f"    [-] Override timeout: {override}")
+        except FileNotFoundError:
+            print(f"    [-] irecovery not found")
+        except Exception as e:
+            print(f"    [-] Error: {e}")
     
     print("⚡ ELECTRICAL WARFARE COMPLETE")
     print("DEVICE DOMINATED THROUGH PURE ELECTRICAL CONTROL")
@@ -183,9 +241,9 @@ def electrical_domination():
 
 def quantum_electrical_attack():
     """Quantum-level electrical manipulation"""
-    base_dir = Path("N:/ROMLOADDER")
-    chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    base_dir = cfg.base_dir
+    chargfast_dir = cfg.chargfast_dir
+    irecovery = cfg.resolve_irecovery()
     
     print("⚛️  QUANTUM ELECTRICAL ATTACK")
     print("MANIPULATING ELECTRONS AT QUANTUM LEVEL")
@@ -193,14 +251,24 @@ def quantum_electrical_attack():
     
     # Get control
     try:
-        subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBSS.k48ap.RELEASE.dfu"], cwd=str(chargfast_dir))
-        subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        result = subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBSS.k48ap.RELEASE.dfu"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBSS load failed")
+        result = subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBSS go failed")
         time.sleep(2)
-        subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBEC.k48ap.RELEASE.dfu"], cwd=str(chargfast_dir))
-        subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        result = subprocess.run([str(irecovery), "-f", "extracted/Firmware/dfu/iBEC.k48ap.RELEASE.dfu"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBEC load failed")
+        result = subprocess.run([str(irecovery), "-c", "go"], cwd=str(chargfast_dir))
+        if result.returncode != 0:
+            print(f"[-] iBEC go failed")
         time.sleep(2)
-    except:
-        pass
+    except FileNotFoundError as e:
+        print(f"[-] irecovery not found: {e}")
+    except Exception as e:
+        print(f"[-] Control failed: {e}")
     
     # Quantum manipulation
     quantum_attacks = [
@@ -220,9 +288,15 @@ def quantum_electrical_attack():
     for attack in quantum_attacks:
         print(f"⚛️  {attack}")
         try:
-            subprocess.run([str(irecovery), "-c", attack], cwd=str(chargfast_dir), timeout=2)
-        except:
-            pass
+            result = subprocess.run([str(irecovery), "-c", attack], cwd=str(chargfast_dir), timeout=2)
+            if result.returncode != 0:
+                print(f"    [-] Quantum attack failed: {attack}")
+        except subprocess.TimeoutExpired:
+            print(f"    [-] Quantum attack timeout: {attack}")
+        except FileNotFoundError:
+            print(f"    [-] irecovery not found")
+        except Exception as e:
+            print(f"    [-] Error: {e}")
     
     # Final quantum boot
     subprocess.run([str(irecovery), "-c", "reset"], cwd=str(chargfast_dir))

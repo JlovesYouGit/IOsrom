@@ -3,12 +3,16 @@
 import subprocess
 import sys
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def direct_usb_flash():
     """Flash ROM directly via USB bypassing all signature checks"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("🚀 DIRECT USB FLASHER")
     print("=" * 25)
@@ -102,9 +106,9 @@ def direct_usb_flash():
 
 def alternative_flash_method():
     """Alternative: Component-by-component flash"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     extracted = chargfast_dir / "extracted"
     
     print("\n🔧 ALTERNATIVE: Component Flash")

@@ -4,6 +4,8 @@ import os
 import subprocess
 import sys
 
+cfg = PathConfig()
+
 def checkm8_exploit():
     """Run checkm8 exploit to pwn DFU"""
     print("[+] Running checkm8 exploit...")

@@ -8,6 +8,7 @@ import sys
 import subprocess
 import platform
 from pathlib import Path
+from utils import PathConfig
 
 APPLE_VENDOR_ID = "0x05AC"
 IOS_MODEL_HINTS = [
@@ -18,6 +19,8 @@ IOS_MODEL_HINTS = [
     "Apple Device",
 ]
 
+
+cfg = PathConfig()
 
 def run_cmd(cmd, **kwargs):
     try:

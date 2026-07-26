@@ -2,10 +2,12 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
-irecovery = chargfast / "irecovery.exe"
+irecovery = cfg.resolve_irecovery()
 
 print("[+] Loading iBSS...")
 subprocess.run([str(irecovery), "-f", str(extracted / "Firmware/dfu/iBSS.k48ap.RELEASE.dfu")], cwd=str(chargfast))
@@ -35,6 +37,6 @@ print("[+] Waiting 60s for ramdisk boot...")
 time.sleep(60)
 
 print("[+] Running idevicerestore...")
-proc = subprocess.Popen([str(chargfast / "idevicerestore.exe"), "--erase", "--custom", "N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw"], stdin=subprocess.PIPE, cwd=str(chargfast), text=True)
+proc = subprocess.Popen([str(chargfast / "idevicerestore"), "--erase", "--custom", str(cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw")], stdin=subprocess.PIPE, cwd=str(chargfast), text=True)
 proc.communicate(input="YES\n")
 print("[+] Done!")

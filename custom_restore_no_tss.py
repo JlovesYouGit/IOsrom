@@ -4,12 +4,16 @@ import subprocess
 import zipfile
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def custom_restore_no_tss():
     """Custom restore bypassing TSS completely"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     ipsw = base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
     
     print("🔧 CUSTOM RESTORE - NO TSS")
