@@ -4,6 +4,8 @@ import os
 import sys
 import subprocess
 
+cfg = PathConfig()
+
 def check_python_tools():
     """Validate Python tools are working"""
     tools = [

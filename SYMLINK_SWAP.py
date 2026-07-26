@@ -4,6 +4,8 @@ import zipfile
 import shutil
 import os
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
 print("[!] This requires iPadOS 26.0.1 IPSW")
 ipados26_path = input("Path to iPadOS 26 IPSW: ").strip('"')
@@ -13,8 +15,8 @@ if not ipados26.exists():
     print("[-] Not found")
     exit(1)
 
-ios433 = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
-work_dir = Path("N:/ROMLOADDER/symlink_work")
+ios433 = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
+work_dir = cfg.base_dir / "symlink_work"
 
 if work_dir.exists():
     shutil.rmtree(work_dir)

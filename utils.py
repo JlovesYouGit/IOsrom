@@ -18,7 +18,7 @@ class PathConfig:
     """Centralized path configuration."""
     
     def __init__(self, base_dir: Optional[str] = None):
-        self.base_dir = Path(base_dir or os.environ.get('IOS_TOOLS_BASE', 'N:/ROMLOADDER'))
+        self.base_dir = Path(base_dir or os.environ.get('IOS_TOOLS_BASE', str(Path.cwd())))
         self.chargfast_dir = self.base_dir / 'chargfast via usb'
         self.extracted_dir = self.chargfast_dir / 'extracted'
         self.firmware_dir = self.base_dir / 'firmware'
@@ -28,13 +28,28 @@ class PathConfig:
             directory.mkdir(parents=True, exist_ok=True)
     
     def irecovery(self) -> Path:
-        return self.chargfast_dir / 'irecovery.exe'
+        return self.resolve_irecovery()
     
     def idevicerestore(self) -> Path:
-        return self.chargfast_dir / 'idevicerestore.exe'
+        return self.chargfast_dir / 'idevicerestore'
     
     def ipsw(self, filename: str) -> Path:
         return self.base_dir / filename
+
+    def resolve_irecovery(self) -> Path:
+        candidates = [
+            self.chargfast_dir / 'irecovery',
+            self.chargfast_dir / 'irecovery.bin',
+            Path('/usr/local/bin/irecovery'),
+            Path('/usr/bin/irecovery'),
+        ]
+        for candidate in candidates:
+            if candidate.exists():
+                return candidate
+        return self.chargfast_dir / 'irecovery'
+
+
+cfg = PathConfig()
 
 
 def run_command(

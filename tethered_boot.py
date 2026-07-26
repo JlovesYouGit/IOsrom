@@ -5,6 +5,8 @@ import sys
 import subprocess
 import shutil
 
+cfg = PathConfig()
+
 def tethered_boot_custom_kernel(base_ipsw, custom_kernel_path):
     """Boot device with custom kernelcache via limera1n tethered boot"""
     

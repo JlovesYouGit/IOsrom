@@ -2,9 +2,11 @@
 """Spoof device hardware ID to match iPadOS 26 expectations"""
 import subprocess
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
-irecovery = chargfast / "irecovery.exe"
+chargfast = cfg.chargfast_dir
+irecovery = cfg.resolve_irecovery()
 
 print("[+] Spoofing device hardware to iPad15,6 (M3)...")
 

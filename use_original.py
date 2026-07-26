@@ -3,6 +3,8 @@
 import shutil
 import sys
 
+cfg = PathConfig()
+
 def copy_original(original_ipsw, output_ipsw):
     """Copy original IPSW for testing"""
     try:

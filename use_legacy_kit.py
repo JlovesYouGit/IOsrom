@@ -3,6 +3,8 @@
 import os
 import shutil
 
+cfg = PathConfig()
+
 def setup_from_legacy_kit():
     """Copy tools from Legacy iOS Kit"""
     legacy_path = "git-hash_2025-09-30-2a7836e\\Legacy-iOS-Kit-latest\\Legacy-iOS-Kit-latest\\bin\\linux\\x86_64"

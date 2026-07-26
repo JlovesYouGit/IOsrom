@@ -3,6 +3,8 @@
 import os
 import sys
 
+cfg = PathConfig()
+
 def use_limera1n_exploit():
     """Use the limera1n exploit from source"""
     limera1n_source = r"1.0.0 source code\libimobiledevice-idevicerestore-a88351d\src\limera1n.c"

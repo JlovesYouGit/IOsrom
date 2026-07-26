@@ -6,6 +6,8 @@ import shutil
 import zipfile
 import struct
 
+cfg = PathConfig()
+
 def stealth_frankenstein(ios4_ipsw, ios9_ipsw, output_ipsw):
     """Make iOS 9 kernel look exactly like iOS 4.3.3 kernel"""
     

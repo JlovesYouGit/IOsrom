@@ -2,10 +2,14 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
-irecovery = chargfast / "irecovery.exe"
+irecovery = cfg.resolve_irecovery()
+
+cfg = PathConfig()
 
 def query():
     result = subprocess.run([str(irecovery), "-q"], capture_output=True, text=True, cwd=str(chargfast))

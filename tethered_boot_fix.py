@@ -3,12 +3,16 @@
 import subprocess
 import sys
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def tethered_boot():
     """Boot iPad with tethered kernel"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     # Find kernel file
     kernel_files = [

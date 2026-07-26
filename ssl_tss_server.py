@@ -7,6 +7,8 @@ import datetime
 
 log_file = "ssl_tss.log"
 
+cfg = PathConfig()
+
 def log_message(msg):
     with open(log_file, 'a') as f:
         f.write(f"{datetime.datetime.now().strftime('%H:%M:%S')} - {msg}\n")

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import subprocess
 from pathlib import Path
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
-irecovery = chargfast / "irecovery.exe"
+cfg = PathConfig()
+chargfast = cfg.chargfast_dir
+irecovery = cfg.resolve_irecovery()
 
 print("[+] Testing device connection...")
 result = subprocess.run([str(irecovery), "-q"], capture_output=True, text=True, cwd=str(chargfast))

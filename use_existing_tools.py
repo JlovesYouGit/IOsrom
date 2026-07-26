@@ -4,6 +4,8 @@ import os
 import subprocess
 import sys
 
+cfg = PathConfig()
+
 def use_redsn0w(ipsw_path):
     """Use redsn0w for restore"""
     redsn0w_exe = "redSn0w\\redsn0w-0.7.1.exe"
