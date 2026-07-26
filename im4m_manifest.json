@@ -1,0 +1,186 @@
+{
+  "schema": "im4m/v1",
+  "manifest_id": "19cb0cad-971",
+  "generated_at": 1785050103.8975065,
+  "device_id": "final-test",
+  "enclave_keys": [
+    {
+      "key_id": "74d0aa92-86f",
+      "enclave_type": "secure_enclave",
+      "key_type": "ECDSA_P256",
+      "public_key": "04f42072610ad10230818e9f80fff214a602e42552549461d7b39763a36c12c8fc",
+      "private_key_ref": "85e32e5690e00e0b9ed8baa1314bbcf1",
+      "signing_material": {
+        "algorithm": "ECDSA_P256",
+        "curve": "secp256r1",
+        "key_size_bits": 256,
+        "usage": [
+          "sign",
+          "verify"
+        ]
+      },
+      "matched": true,
+      "device_id": "final-test",
+      "extracted_at": 1785050103.8977497,
+      "metadata": {}
+    },
+    {
+      "key_id": "441a70e0-14f",
+      "enclave_type": "secure_enclave",
+      "key_type": "ECDSA_P256",
+      "public_key": "040599a0f9f819e032d5c1aea5d55a2f3a9b80063a349161ffc273b1112eaaed53",
+      "private_key_ref": "2b1b60c492c4d6c221e03e354652e9bd",
+      "signing_material": {
+        "algorithm": "ECDSA_P256",
+        "curve": "secp256r1",
+        "key_size_bits": 256,
+        "usage": [
+          "sign",
+          "verify"
+        ]
+      },
+      "matched": true,
+      "device_id": "final-test",
+      "extracted_at": 1785050103.897788,
+      "metadata": {}
+    },
+    {
+      "key_id": "2435de50-e6d",
+      "enclave_type": "secure_enclave",
+      "key_type": "ECDSA_P256",
+      "public_key": "04065571aa110ee8568e7a214d0af5fcb05b52254f502253655bcbe19c7755fa6e",
+      "private_key_ref": "487439b1c3946ce6b8459947133fe03f",
+      "signing_material": {
+        "algorithm": "ECDSA_P256",
+        "curve": "secp256r1",
+        "key_size_bits": 256,
+        "usage": [
+          "sign",
+          "verify"
+        ]
+      },
+      "matched": true,
+      "device_id": "final-test",
+      "extracted_at": 1785050103.8978088,
+      "metadata": {}
+    }
+  ],
+  "signing_materials": [
+    {
+      "material_id": "4f9ebc92-67e",
+      "key_id": "74d0aa92-86f",
+      "material_type": "enclave_signing_blob",
+      "content_hash": "f4e88d40e9fc4c6231274def506eb42a46d8106e57c96d812580c44b5868527f",
+      "content": "sign:04f42072610ad10230818e9f80fff214a602e42552549461d7b39763a36c12c8fc:74d0aa92-86f:1785050103.8977497",
+      "algorithm": "SHA256withECDSA",
+      "timestamp": 1785050103.8979614,
+      "device_ref": "final-test",
+      "enclave_key_id": "74d0aa92-86f"
+    },
+    {
+      "material_id": "31fa8c61-8fc",
+      "key_id": "441a70e0-14f",
+      "material_type": "enclave_signing_blob",
+      "content_hash": "87ad4de5031b99aa39dbee243f08fb70c6f985f9ee0706502796c2f9b7285347",
+      "content": "sign:040599a0f9f819e032d5c1aea5d55a2f3a9b80063a349161ffc273b1112eaaed53:441a70e0-14f:1785050103.897788",
+      "algorithm": "SHA256withECDSA",
+      "timestamp": 1785050103.8980258,
+      "device_ref": "final-test",
+      "enclave_key_id": "441a70e0-14f"
+    },
+    {
+      "material_id": "1546c019-056",
+      "key_id": "2435de50-e6d",
+      "material_type": "enclave_signing_blob",
+      "content_hash": "b61d34737dd7ed37026fda642b3cfe75755f93d1b91840bf45b625df6ad33f2c",
+      "content": "sign:04065571aa110ee8568e7a214d0af5fcb05b52254f502253655bcbe19c7755fa6e:2435de50-e6d:1785050103.8978088",
+      "algorithm": "SHA256withECDSA",
+      "timestamp": 1785050103.898106,
+      "device_ref": "final-test",
+      "enclave_key_id": "2435de50-e6d"
+    }
+  ],
+  "attestations": [
+    {
+      "token_id": "3e4aa967-a9e9-48",
+      "key_id": "74d0aa92-86f",
+      "enclave_key_id": "74d0aa92-86f",
+      "algorithm": "ECDSA_P256",
+      "signature": "0x8550a1104f4a3afa1f99843114452da5a17aaecf03b51374ac87336a2b1048e4",
+      "payload_hash": "89869d1e57cdbc5460fd39508921970e9c32a596e21f4e39e56aba374e5b8934",
+      "issued_at": 1785050103.8985016,
+      "expires_at": 1785053703.8985047,
+      "metadata": {},
+      "issued_at_iso": "2026-07-26T07:15:03Z"
+    },
+    {
+      "token_id": "f6c8cfdb-0641-4a",
+      "key_id": "441a70e0-14f",
+      "enclave_key_id": "441a70e0-14f",
+      "algorithm": "ECDSA_P256",
+      "signature": "0x05d36cfc5f53c1544605af80827b9378ea72ada6c013bd97b08954281d5a202d",
+      "payload_hash": "a6abccea99f5634ef11c5eb43d2b04df96493ecc0b6a2205a2ff6a0189ff04a0",
+      "issued_at": 1785050103.898714,
+      "expires_at": 1785053703.8987167,
+      "metadata": {},
+      "issued_at_iso": "2026-07-26T07:15:03Z"
+    },
+    {
+      "token_id": "60d6a3e7-75c8-48",
+      "key_id": "2435de50-e6d",
+      "enclave_key_id": "2435de50-e6d",
+      "algorithm": "ECDSA_P256",
+      "signature": "0x512c232438bf86f732c5c408574ddfd8dba9c7c486920864db23acdef01e57c6",
+      "payload_hash": "f657869baf066ba9f9173bd2a919d6f2c845cd854991a293d955e0fbe4e381c8",
+      "issued_at": 1785050103.8988528,
+      "expires_at": 1785053703.8988535,
+      "metadata": {},
+      "issued_at_iso": "2026-07-26T07:15:03Z"
+    },
+    {
+      "token_id": "ae1cd1b5-84a4-42",
+      "key_id": "478804c18b29",
+      "enclave_key_id": "",
+      "algorithm": "SHA256withECDSA",
+      "signature": "0x161202322e425e6bc62e9df9babdf0b23f5a9a9abaf451bd637d909b063ac03a",
+      "payload_hash": "478804c18b29e830f00b2f9f59c135760f8706621371c91a10cddd7ecaf26ec9",
+      "issued_at": 1785050103.8989556,
+      "expires_at": 1785053703.898956,
+      "metadata": {
+        "material_type": "enclave_signing_blob"
+      },
+      "issued_at_iso": "2026-07-26T07:15:03Z"
+    },
+    {
+      "token_id": "1d1e95f1-b027-4c",
+      "key_id": "89f368926516",
+      "enclave_key_id": "",
+      "algorithm": "SHA256withECDSA",
+      "signature": "0x1f8657136d474c4ccd6088af814c6b077832d97c23c17859d590379feb324eb2",
+      "payload_hash": "89f3689265164187aa84686e25ea8c75d727bdf4c12f1bd02de46208aeaf9fbf",
+      "issued_at": 1785050103.899065,
+      "expires_at": 1785053703.899066,
+      "metadata": {
+        "material_type": "enclave_signing_blob"
+      },
+      "issued_at_iso": "2026-07-26T07:15:03Z"
+    },
+    {
+      "token_id": "4e4bc487-3d9e-4d",
+      "key_id": "ee1778b8acd1",
+      "enclave_key_id": "",
+      "algorithm": "SHA256withECDSA",
+      "signature": "0x92008b2b0adcb38c5e9c0e363ab24538f2a9eaf92d328fdbaf3f9a699318a5c8",
+      "payload_hash": "ee1778b8acd153e50ec3fa19028a7fbf06837e87fd14b650f17a1dc1f9124044",
+      "issued_at": 1785050103.8991845,
+      "expires_at": 1785053703.899185,
+      "metadata": {
+        "material_type": "enclave_signing_blob"
+      },
+      "issued_at_iso": "2026-07-26T07:15:03Z"
+    }
+  ],
+  "manifest_hash": "9d7b2bdf64be94e6ad4574fd696add1fdcbd7c9d90616070deb72b992cf1108f",
+  "saved_path": "/home/j/Downloads/ios romm/ai model/Vemex/satoshi-NM/virtual-probe_X/im4m_manifest.json",
+  "generated_at_iso": "2026-07-26T07:15:03Z"
+}

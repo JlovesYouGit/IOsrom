@@ -1,0 +1,8 @@
+04:57:35.365    <Info> idevicerestore 1.0.0-git-45145e9 (libirecovery 1.3.1, libtatsu 1.0.5)
+04:57:44.029    <Info> Found device in Normal mode
+04:57:44.080    <Info> ECID: 7133975844373286
+04:57:44.080    <Info> Identified device as d11ap, iPhone9,2
+04:57:44.089    <Info> Device Product Version: 15.5
+04:57:44.089    <Info> Device Product Build: 19F77
+04:57:44.089    <Info> Extracting BuildManifest from IPSW
+04:57:44.090   <Error> Could not make sure this firmware is suitable for the current device. Refusing to continue.

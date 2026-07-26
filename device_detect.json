@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "devices": [],
+  "total_detected": 0,
+  "recovery_devices": [],
+  "available_ipsws": [],
+  "matched_ipsw": {},
+  "error": "No iOS devices detected via idevice_id",
+  "timestamp": 1785050103.8866081,
+  "timestamp_iso": "2026-07-26T07:15:03Z"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "firmware/v1",
+  "updated_at": "2026-07-26T04:32:00-04:00",
+  "firmwares": [
+    {
+      "product_type": "iPhone18,5",
+      "device_name": "iPhone 16 Pro Max",
+      "ios_version": "26.5.2",
+      "build_id": "23F84",
+      "filename": "iPhone18,5_26.5.2_23F84_Restore.ipsw.PFILE",
+      "url": "https://ipsw.me/download/iPhone18,5/23F84",
+      "release_date": "2026-05-19",
+      "signed": true,
+      "size_bytes": 10954737840,
+      "local_path": "/home/j/Downloads/ios romm/firmware/iPhone18,5_26.5.2_23F84_Restore.ipsw.PFILE"
+    },
+    {
+      "product_type": "iPhone8,2",
+      "device_name": "iPhone 8 Plus",
+      "ios_version": "15.8.8",
+      "build_id": "19H422",
+      "filename": "iPhone_5.5_P3_15.8.8_19H422_Restore.ipsw.PFILE",
+      "url": "https://ipsw.me/download/iPhone8,2/19H422",
+      "release_date": "2026-05-19",
+      "signed": true,
+      "size_bytes": 5555860816,
+      "local_path": "/home/j/Downloads/ios romm/firmware/iPhone_5.5_P3_15.8.8_19H422_Restore.ipsw.PFILE"
+    },
+    {
+      "product_type": "merged",
+      "device_name": "Merged Firmware",
+      "ios_version": "unknown",
+      "build_id": "unknown",
+      "filename": "merged_firmware.PFILE",
+      "url": "",
+      "release_date": "2026-07-26",
+      "signed": false,
+      "size_bytes": 16510598656,
+      "local_path": "/home/j/Downloads/ios romm/firmware/merged_firmware.PFILE",
+      "note": "Root-owned merged firmware. Requires sudo to use."
+    }
+  ]
+}
