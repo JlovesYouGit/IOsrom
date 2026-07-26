@@ -1,0 +1,12 @@
+14:04:15.811    <Info> idevicerestore 1.0.0-git-45145e9 (libirecovery 1.3.1, libtatsu 1.0.5)
+14:04:15.850    <Info> Found device in Recovery mode
+14:04:15.851    <Info> ECID: 7133975844373286
+14:04:15.851    <Info> Identified device as d11ap, iPhone9,2
+14:04:15.851    <Info> Device Product Version: N/A
+14:04:15.851    <Info> Device Product Build: N/A
+14:04:16.056  <Notice> Running non-interactively, automatically selecting latest available version
+14:04:16.056  <Notice> Selected firmware 15.8.8 (build 19H422)
+14:04:16.056    <Info> Verifying 'iPhone_5.5_P3_15.8.8_19H422_Restore.ipsw'...
+14:04:16.057    <Info> Checksum does not match.
+14:04:16.057    <Info> Downloading firmware (https://updates.cdn-apple.com/2025FallFCS/fullrestores/122-77525/29E86E57-1478-4ABD-BF2F-3CA41EF1CB7E/iPhone_5.5_P3_15.8.8_19H422_Restore.ipsw)
+14:04:45.867  <Notice> Download aborted by user

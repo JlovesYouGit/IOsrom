@@ -1,0 +1,26 @@
+14:23:04.434    <Info> idevicerestore 1.0.0-git-45145e9 (libirecovery 1.3.1, libtatsu 1.0.5)
+14:23:04.479    <Info> Found device in Recovery mode
+14:23:04.481    <Info> ECID: 7133975844373286
+14:23:04.481    <Info> Identified device as d11ap, iPhone9,2
+14:23:04.481    <Info> Device Product Version: N/A
+14:23:04.481    <Info> Device Product Build: N/A
+14:23:04.543  <Notice> Running non-interactively, automatically selecting latest available version
+14:23:04.543  <Notice> Selected firmware 15.8.8 (build 19H422)
+14:23:04.543    <Info> Verifying 'iPhone_5.5_P3_15.8.8_19H422_Restore.ipsw'...
+14:24:52.788    <Info> Checksum matches.
+14:24:52.788    <Info> Extracting BuildManifest from IPSW
+14:24:52.801    <Info> IPSW Product Version: 15.8.8
+14:24:52.801    <Info> IPSW Product Build: 19H422 Major: 19
+14:24:52.803    <Info> INFO: device serial number is FCMT80XPHFXX
+14:24:52.803    <Info> Device supports Image4: true
+14:24:52.803    <Info> Variant: Customer Upgrade Install (IPSW)
+14:24:52.803    <Info> This restore will update the device without erasing user data.
+14:24:52.803    <Info> Checking IPSW for required components...
+14:24:52.808    <Info> All required components found in IPSW
+14:24:52.808    <Info> Getting ApNonce in Recovery mode... 0b 97 71 1c 20 9c 50 4f 77 07 81 db 34 53 05 7c 5e fe 47 0a fc c2 61 f4 2e ae e2 c8 38 ad 67 4e
+14:24:52.808    <Info> Trying to fetch new SHSH blob
+14:24:52.808    <Info> Getting SepNonce in recovery mode... b9 ca f5 37 b8 68 5a f3 00 f3 af b9 6f 8f ce b9 07 d8 90 fc
+14:24:53.221    <Info> Received SHSH blobs
+14:24:53.222    <Info> Extracting iBEC.d11.RELEASE.im4p (Firmware/dfu/iBEC.d11.RELEASE.im4p)...
+14:24:53.224    <Info> Personalizing IMG4 component iBEC...
+14:24:53.225    <Info> Sending iBEC (555161 bytes)...
