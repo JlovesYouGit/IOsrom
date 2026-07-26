@@ -3,6 +3,8 @@ import struct
 import sys
 import os
 
+cfg = PathConfig()
+
 class IMG4Tool:
     def __init__(self):
         self.magic = b'IMG4'

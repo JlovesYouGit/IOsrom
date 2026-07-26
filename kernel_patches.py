@@ -2,6 +2,8 @@
 import struct
 import sys
 
+cfg = PathConfig()
+
 def patch_kernelcache(kernel_path):
     try:
         with open(kernel_path, 'rb') as f:

@@ -4,12 +4,16 @@ import subprocess
 import struct
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def live_nand_fix():
     """Fix NAND live on device"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("🔧 LIVE NAND FIXER")
     print("Fixing partitions, filesystem, controller LIVE")

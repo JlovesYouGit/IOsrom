@@ -6,6 +6,8 @@ import shutil
 import zipfile
 import tempfile
 
+cfg = PathConfig()
+
 def minimal_modification(ios4_ipsw, ios9_ipsw, output_ipsw):
     """Minimal mod - only replace kernelcache, keep rest identical"""
     

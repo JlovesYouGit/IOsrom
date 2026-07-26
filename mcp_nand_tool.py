@@ -4,15 +4,19 @@ import subprocess
 import json
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 from typing import Dict, List, Any, Optional
+
+cfg = PathConfig()
 
 class MCPNANDTool:
     """MCP tool for direct NAND manipulation"""
     
     def __init__(self):
-        self.base_dir = Path("N:/ROMLOADDER")
+        self.base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
         self.chargfast_dir = self.base_dir / "chargfast via usb"
-        self.irecovery = self.chargfast_dir / "irecovery.exe"
+        self.irecovery = cfg.resolve_irecovery()
         self.device_state = {}
         self.last_command_result = None
         
@@ -65,7 +69,7 @@ class MCPNANDTool:
                         if part.startswith('0x') or len(part) == 8:
                             try:
                                 memory_data.append(int(part, 16))
-                            except:
+                            except Exception as e:
                                 pass
             
             result["memory_data"] = memory_data

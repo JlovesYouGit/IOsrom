@@ -2,10 +2,14 @@
 """Launch iFaith to build signed IPSW for bypassed iPad"""
 import subprocess
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def launch_ifaith():
     """Launch iFaith for signed IPSW building"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     ifaith_exe = base_dir / "ifaith-v1.5.9" / "iFaith-v1.5.9.exe"
     
     print("🔧 iFaith SIGNED IPSW BUILDER")

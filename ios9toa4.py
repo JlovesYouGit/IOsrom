@@ -7,6 +7,8 @@ import os
 import sys
 import logging
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 from dataclasses import dataclass
 from typing import Optional, List, Dict
 
@@ -21,6 +23,8 @@ import iboot_patches
 import devicetree_patches
 
 @dataclass
+cfg = PathConfig()
+
 class FirmwareComponent:
     """Represents a firmware component"""
     name: str
@@ -312,7 +316,7 @@ class iOS9toA4Backend:
             # Restore backup if fix failed
             try:
                 shutil.copy2(manifest_path + ".backup", manifest_path)
-            except:
+            except Exception as e:
                 pass
             self.logger.warning(f"Failed to fix BuildManifest: {e}")
 

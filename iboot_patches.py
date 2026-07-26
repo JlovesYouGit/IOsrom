@@ -2,6 +2,8 @@
 import struct
 import sys
 
+cfg = PathConfig()
+
 def patch_iboot(iboot_path):
     try:
         with open(iboot_path, 'rb') as f:

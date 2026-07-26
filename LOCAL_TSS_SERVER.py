@@ -3,6 +3,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import plistlib
 
+cfg = PathConfig()
+
 class TSSHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
@@ -15,7 +17,7 @@ class TSSHandler(BaseHTTPRequestHandler):
             request = plistlib.loads(post_data)
             print(f"    ECID: {request.get('@APTicket', {}).get('ApECID', 'unknown')}")
             print(f"    Nonce: {request.get('@APTicket', {}).get('ApNonce', 'unknown')}")
-        except:
+        except Exception as e:
             pass
         
         # Create fake successful response

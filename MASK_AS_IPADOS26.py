@@ -5,9 +5,11 @@ import plistlib
 import zipfile
 import shutil
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
-irecovery = chargfast / "irecovery.exe"
+chargfast = cfg.chargfast_dir
+irecovery = cfg.resolve_irecovery()
 
 # Get and freeze NONCE
 result = subprocess.run([str(irecovery), "-q"], capture_output=True, text=True, cwd=str(chargfast))
@@ -22,9 +24,9 @@ subprocess.run([str(irecovery), "-c", f"setenv boot-nonce {nonce}"], cwd=str(cha
 subprocess.run([str(irecovery), "-c", "saveenv"], cwd=str(chargfast))
 
 print("[1] Extracting iOS 4.3.3...")
-base_ipsw = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
-masked_ipsw = Path("N:/ROMLOADDER/iPad1,1_MASKED_iPadOS26.ipsw")
-work_dir = Path("N:/ROMLOADDER/mask_work")
+base_ipsw = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
+masked_ipsw = cfg.base_dir / "iPad1,1_MASKED_iPadOS26.ipsw"
+work_dir = cfg.base_dir / "mask_work"
 
 if work_dir.exists():
     shutil.rmtree(work_dir)

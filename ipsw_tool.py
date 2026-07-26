@@ -3,6 +3,8 @@ import zipfile
 import os
 import sys
 
+cfg = PathConfig()
+
 class IPSWTool:
     def extract_all(self, ipsw_path, output_dir):
         """Extract IPSW contents"""

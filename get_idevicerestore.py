@@ -4,6 +4,8 @@ import os
 import urllib.request
 import zipfile
 
+cfg = PathConfig()
+
 def download_idevicerestore():
     """Download pre-built idevicerestore"""
     

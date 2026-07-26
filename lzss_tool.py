@@ -2,6 +2,8 @@
 import struct
 import sys
 
+cfg = PathConfig()
+
 def decompress_lzss(data):
     """Decompress LZSS compressed data (iOS kernelcache format)"""
     if len(data) < 12:

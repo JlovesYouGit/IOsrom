@@ -4,12 +4,16 @@ import subprocess
 import time
 import zipfile
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def manual_restore():
     """Manually perform complete restore"""
-    chargfast_dir = Path("N:/ROMLOADDER/chargfast via usb")
-    irecovery = chargfast_dir / "irecovery.exe"
-    ipsw = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
+    chargfast_dir = Path(str(Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER")) / "chargfast via usb"))
+    irecovery = cfg.resolve_irecovery()
+    ipsw = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
     
     print("MANUAL COMPLETE RESTORE")
     print("=" * 25)

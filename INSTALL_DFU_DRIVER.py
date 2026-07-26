@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import subprocess
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 zadig = chargfast / "zadig-2.9.exe"
 
 print("[!] Installing WinUSB driver for DFU mode device")

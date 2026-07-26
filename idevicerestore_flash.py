@@ -5,6 +5,8 @@ import sys
 import subprocess
 import glob
 
+cfg = PathConfig()
+
 def get_latest_ipsw():
     """Find the target IPSW file"""
     target_ipsw = "iPad1,1_iOS9_A4_Final.ipsw"

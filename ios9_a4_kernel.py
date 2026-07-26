@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Build iOS 9 kernel for A4 hardware - the honest approach"""
 
+cfg = PathConfig()
+
 def create_ios9_a4_build():
     """Create iOS 9 kernel that actually runs on A4 hardware"""
     

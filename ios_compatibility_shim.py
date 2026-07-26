@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """iOS 4/9 Compatibility Shim - Theoretical Implementation"""
 
+cfg = PathConfig()
+
 def create_compatibility_shim():
     """Create compatibility layer to bridge iOS 4 kernel with iOS 9 userspace"""
     

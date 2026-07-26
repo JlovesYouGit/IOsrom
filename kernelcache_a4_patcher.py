@@ -4,6 +4,8 @@ import mmap
 import os
 import sys
 
+cfg = PathConfig()
+
 class KernelPatcher:
     def __init__(self, kernel_path, output_path=None):
         try:

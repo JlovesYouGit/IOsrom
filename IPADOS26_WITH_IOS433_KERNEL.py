@@ -3,6 +3,8 @@
 import zipfile
 import shutil
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
 print("="*60)
 print("FRANKENSTEIN IPSW - iPadOS 26 body, iOS 4.3.3 brain")
@@ -15,9 +17,9 @@ if not ipados26.exists():
     print("[-] Not found")
     exit(1)
 
-ios433 = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
-output = Path("N:/ROMLOADDER/iPad1,1_FRANKENSTEIN_BOOTABLE.ipsw")
-work_dir = Path("N:/ROMLOADDER/frankenstein_bootable")
+ios433 = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
+output = cfg.base_dir / "iPad1,1_FRANKENSTEIN_BOOTABLE.ipsw"
+work_dir = cfg.base_dir / "frankenstein_bootable"
 
 if work_dir.exists():
     shutil.rmtree(work_dir)

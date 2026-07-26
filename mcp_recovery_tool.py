@@ -3,12 +3,16 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def get_pwned_control():
     """Get pwned iBEC control first"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("[MCP] Getting pwned control...")
     
@@ -42,9 +46,9 @@ def get_pwned_control():
 
 def mcp_direct_nand_fix():
     """Direct NAND fix with MCP control"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("[MCP] Direct NAND fix starting...")
     
@@ -113,7 +117,7 @@ def mcp_direct_nand_fix():
         print(f"[MCP] {cmd}")
         try:
             subprocess.run([str(irecovery), "-c", cmd], cwd=str(chargfast_dir), timeout=10)
-        except:
+        except Exception as e:
             pass
     
     print("[MCP] 🎉 Direct NAND fix complete!")

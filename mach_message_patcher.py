@@ -2,6 +2,8 @@
 """Patch Mach message headers for iOS 4/9 compatibility"""
 import struct
 
+cfg = PathConfig()
+
 def create_libxpc_patches():
     """Create binary patches for libxpc.dylib to strip voucher field"""
     

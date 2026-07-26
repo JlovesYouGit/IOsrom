@@ -19,6 +19,8 @@ with open(log_file, 'w') as f:
     f.write(f"iTunes IP Request Log - {datetime.datetime.now()}\n")
     f.write("=" * 50 + "\n\n")
 
+cfg = PathConfig()
+
 def log_to_file(message):
     """Log message to both console and file"""
     print(message)
