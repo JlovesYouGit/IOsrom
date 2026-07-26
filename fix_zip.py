@@ -4,6 +4,8 @@ import zipfile
 import sys
 import os
 
+cfg = PathConfig()
+
 def fix_zip(input_file, output_file):
     """Attempt to fix corrupted ZIP file"""
     try:

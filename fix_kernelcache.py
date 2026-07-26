@@ -4,6 +4,8 @@ import zipfile
 import sys
 import os
 
+cfg = PathConfig()
+
 def fix_kernelcache(original_ipsw, broken_ipsw, output_ipsw):
     """Replace corrupted kernelcache with original"""
     try:

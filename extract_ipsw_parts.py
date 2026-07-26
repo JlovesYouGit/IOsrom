@@ -4,6 +4,8 @@ import os
 import zipfile
 import shutil
 
+cfg = PathConfig()
+
 def extract_ipsw():
     """Extract iPad1,1_iOS9_A4_Final.ipsw components"""
     ipsw_file = "iPad1,1_iOS9_A4_Final.ipsw"

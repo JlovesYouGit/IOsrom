@@ -4,6 +4,8 @@ import plistlib
 import sys
 import os
 
+cfg = PathConfig()
+
 def fix_buildmanifest(manifest_path):
     """Update BuildManifest.plist for A4 compatibility"""
     try:

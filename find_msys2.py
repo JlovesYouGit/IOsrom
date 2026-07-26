@@ -3,6 +3,8 @@
 import os
 import glob
 
+cfg = PathConfig()
+
 def find_msys2():
     """Find MSYS2 paths"""
     search_paths = [

@@ -4,6 +4,8 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import plistlib
 import struct
 
+cfg = PathConfig()
+
 class TSSHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         if '/TSS/controller' not in self.path:

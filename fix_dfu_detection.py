@@ -3,6 +3,8 @@
 import subprocess
 import time
 
+cfg = PathConfig()
+
 def check_dfu_device():
     """Check if device is properly detected in DFU mode"""
     print("[+] Checking DFU device detection...")

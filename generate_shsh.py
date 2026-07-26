@@ -6,6 +6,8 @@ import struct
 import time
 import sys
 
+cfg = PathConfig()
+
 def generate_shsh_blob(device_model="iPad1,1", ios_version="4.3.3", build="8J3"):
     """Generate fake but valid-looking SHSH blob"""
     

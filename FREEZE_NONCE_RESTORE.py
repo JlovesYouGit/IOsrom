@@ -5,9 +5,11 @@ import plistlib
 import zipfile
 import shutil
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
-irecovery = chargfast / "irecovery.exe"
+chargfast = cfg.chargfast_dir
+irecovery = cfg.resolve_irecovery()
 
 # Step 1: Get current NONCE
 print("[1] Reading current NONCE...")
@@ -28,9 +30,9 @@ print("[+] NONCE frozen in NVRAM")
 
 # Step 3: Create custom IPSW with this NONCE
 print("[3] Creating IPSW with frozen NONCE...")
-base_ipsw = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
-custom_ipsw = Path("N:/ROMLOADDER/iPad1,1_NONCE_FROZEN.ipsw")
-work_dir = Path("N:/ROMLOADDER/nonce_work")
+base_ipsw = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
+custom_ipsw = cfg.base_dir / "iPad1,1_NONCE_FROZEN.ipsw"
+work_dir = cfg.base_dir / "nonce_work"
 
 if work_dir.exists():
     shutil.rmtree(work_dir)

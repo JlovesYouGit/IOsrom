@@ -4,6 +4,8 @@ import os
 import sys
 import shutil
 
+cfg = PathConfig()
+
 def fix_manifest(ipsw_dir):
     """Copy original BuildManifest and fix it properly"""
     manifest_path = os.path.join(ipsw_dir, "BuildManifest.plist")
