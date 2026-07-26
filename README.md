@@ -344,6 +344,7 @@ with open(OUT, "wb") as out:
         path = os.path.join("mirror_downloads", frag["filename"])
         with open(path, "rb") as fp:
             out.write(fp.read())
+
 print(f"Reassembled {OUT} from {len(index['fragments'])} fragments")
 ```
 
@@ -355,3 +356,14 @@ print(f"Reassembled {OUT} from {len(index['fragments'])} fragments")
 - `retrieve_mirror()` uses a **0.8 character-similarity threshold** by default, permitting fuzzy lookup without full decode.
 - The scanner sends **raw HTTP requests** only to user-specified targets. No hardcoded external URLs are accessed unless explicitly scanned.
 - This model mirrors Xbox Delivery Optimization: peer-to-peer fragment discovery and local reassembly, but uses **hash proximity** instead of centralized manifest files.
+
+
+network tools
+https://github.com/JlovesYouGit/SEC-unit-core-sort.git 
+https://github.com/JlovesYouGit/The-Crown.git
+render gate package
+https://github.com/JlovesYouGit/SeedGate.git
+ios device model vemex
+for other version supports all ios devices needs to be connected to main apple server 
+all ipsw mac os ios files supported all nands all A series chipset and droid snap dragon and mediatek via transaltion vemex layers
+
