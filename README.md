@@ -1,129 +1,184 @@
-﻿# seed-sampler
+# ChargFast via USB - iOS Recovery Tools
 
-A local, read-only indexer + async runner for the `zero-brain/`,
-`The-Crown/`, and `SEC-unit-core-sort/` trees. Finds "seeds" in source via
-regex, resolves each seed's git-commit origin, detects duplicates across the
-trees ("threat events"), and streams events through a long-running C# kernel
-that derives an alphanumeric key from the seed's binary form.
+A comprehensive Python utility for iOS device management, USB scanning, and auto-boot recovery fixing.
 
-Also includes a Python-version manager that detects the required interpreter
-per directory (from `.python-version`, `pyproject.toml`, shebangs) and
-dispatches simulation runs under the correct `python3.x` subprocess.
+## Features
 
-## Hard constraints
+- 🍎 **iOS Recovery Management**: Fix auto-boot issues with irecovery integration
+- 🔍 **Multi-method USB detection**: PyUSB, PowerShell, and WMI fallbacks
+- 📱 **Apple Device Detection**: Enhanced scanning for iPad/iPhone devices
+- 🔧 **Auto-boot Fixer**: Resolve iOS charging and boot loop issues
+- 📊 **JSON output format**: Perfect for automation and integration
+- 🖥️ **Text output format**: Human-readable console output
+- 🪟 **Windows optimized**: Works reliably on Windows 10/11
+- 🐍 **Virtual environment**: Isolated dependencies
 
-The tool is intentionally scoped:
+## Quick Start - Fix iOS Auto-Boot Issue
 
-- **Read-only** against source dirs. Nothing writes into them.
-- **Never `exec`s scanned content.** Scanned files are treated as bytes; the
-  only thing that runs is code under `seed-sampler/`.
-- **No network, Bluetooth, serial, or USB I/O.** No sockets are opened.
-- **C# kernel talks over stdin/stdout JSONL only.** No sockets, no P/Invoke.
-- Snapshots capped at 64 KB per file.
+**If your iOS device won't charge or is stuck in boot loop:**
 
-## Layout
+1. **Download iOS tools** (if not already done):
+   - Download `libimobiledevice.1.2.1-r1122-win-x64.zip` from [GitHub releases](https://github.com/libimobiledevice-win32/imobiledevice-net/releases)
+   - Extract to current directory (should have `irecovery.exe`)
 
-```
-seed-sampler/
-├── python/
-│   ├── requirements.txt
-│   └── seed_sampler/
-│       ├── scanner.py       # regex seed extraction
-│       ├── tracer.py        # git-origin resolution
-│       ├── detector.py      # duplicate detection + reverse-sequence algo
-│       ├── tracker.py       # JSON catalog r/w + query
-│       ├── pyversion.py     # per-dir Python version detection + dispatch
-│       ├── runner.py        # asyncio pipeline → kernel
-│       ├── kernel_stub.py   # pure-Python fallback kernel
-│       └── cli.py           # scan / query / run / versions
-├── csharp/
-│   ├── SeedKernel.csproj
-│   ├── Program.cs           # stdin JSONL loop
-│   ├── Kernel.cs            # async processor, binary blocks
-│   └── KeyDerivation.cs     # base36 alphanumeric key
-└── data/
-    ├── tracker.json         # generated
-    └── snapshots/           # generated
-```
+2. **Put your iOS device in recovery mode**:
+   - Connect via USB
+   - Hold Power + Home (or Volume Down on newer devices)
+   - Wait for recovery mode screen
 
-## Quickstart
+3. **Run the fix**:
+   ```bash
+   python fix_auto_boot.py
+   ```
+   Or double-click: `FIX_AUTOBOOT.bat`
 
+## Full Setup
+
+1. Create and activate virtual environment:
 ```bash
-cd seed-sampler/python
-pip install -r requirements.txt
-
-# Index all three source trees into data/tracker.json
-python -m seed_sampler.cli scan
-
-# Query
-python -m seed_sampler.cli query --duplicates
-python -m seed_sampler.cli query --value <sha256_prefix>
-python -m seed_sampler.cli query --path 'The-Crown/**/QNT-Blue/**'
-python -m seed_sampler.cli query --origin <commit_sha>
-
-# List Python versions required per source dir
-python -m seed_sampler.cli versions
-
-# Run the async pipeline (uses C# kernel if `dotnet` is on PATH,
-# else falls back to the pure-Python kernel stub)
-python -m seed_sampler.cli run
+python -m venv venv
+.\venv\Scripts\Activate.ps1  # Windows PowerShell
 ```
 
-## What counts as a seed
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-Text-only regex matches against files with common source extensions
-(`.py .js .ts .cs .cpp .c .h .rs .go .json .toml .yaml .yml .md .txt`) plus
-any file named `SEED`. Patterns:
+3. Setup iOS tools:
+```bash
+python setup_ios_tools.py
+```
 
-- `seed = <int>` / `SEED = <int>`
-- `random.seed(<int>)`, `np.random.seed(<int>)`
-- `Random(<int>)`, `srand(<int>)`, `new Random(<int>)`
-- `SEED=<value>` in env-style lines
-- Hex strings ≥ 32 chars (SHA-ish)
-- Files literally named `SEED` (whole-file content)
-- Lines starting with `# seed:` or `// seed:` prefix
+## Usage
 
-Each match becomes a `Seed` record:
+### iOS Recovery & Auto-Boot Fixing
 
+#### Fix auto-boot issue (main use case):
+```bash
+python fix_auto_boot.py
+```
+
+#### Check for iOS devices in recovery mode:
+```bash
+python src/usb_scanner.py --ios-recovery
+```
+
+#### Full iOS device management:
+```bash
+python src/ios_recovery_manager.py --scan
+python src/ios_recovery_manager.py --info
+python src/ios_recovery_manager.py --auto-boot enable
+```
+
+### USB Device Scanning
+
+#### Enhanced Apple device scan:
+```bash
+python src/usb_scanner.py --apple-scan
+```
+
+#### Basic JSON output (default):
+```bash
+python src/usb_scanner.py
+```
+
+#### Text format output:
+```bash
+python src/usb_scanner.py --format text
+```
+
+#### Find specific iPad devices:
+```bash
+python src/ipad_finder.py
+python src/target_ipad.py
+```
+
+## Example Output
+
+### JSON Format:
 ```json
 {
-  "address": "The-Crown/QuantumEnergyService/foo.py",
-  "line": 42,
-  "kind": "random_seed_call",
-  "value": "1337",
-  "value_sha256": "e5b7e9…",
-  "origin": {"commit": "a1b2c3…", "timestamp": 1720000000, "repo": "The-Crown"}
+  "timestamp": "2025-10-02T13:34:05.995781",
+  "method": "PowerShell",
+  "device_count": 10,
+  "devices": [
+    {
+      "name": "TP-Link Bluetooth 5.4 USB Adapter",
+      "instance_id": "USB\\VID_2357&PID_0604\\E848B8C82000",
+      "device_class": "Bluetooth",
+      "manufacturer": "TP-Link Systems Inc.",
+      "status": "OK",
+      "vendor_id": "0x2357",
+      "product_id": "0x0604"
+    }
+  ]
 }
 ```
 
-## Reverse-sequence / threat detection
+## Development
 
-When the same `value_sha256` appears in ≥2 records:
+This project is configured to work with VS Code and uses a local virtual environment.
+- Python interpreter: `./venv/Scripts/python.exe`
+- Debugger: Modern `debugpy` configuration
+- Dependencies: Locally installed in virtual environment
 
-1. All records for that value are grouped as a **threat event**.
-2. The ordered list of `(address, line)` occurrences is captured.
-3. The list is reversed and re-indexed — this reversed order is the
-   "trace" written into `tracker.threats[].reverse_trace`.
-4. Canonical origin = record with the earliest `origin.timestamp`
-   (fallback: lexicographically smallest address).
-5. A per-value snapshot is written to `data/snapshots/<value_sha256>.json`.
+## Detection Methods
 
-## Async pipeline
-yes, you provide the destination device identity (MAC + link/port-ish value) to activate routing, but the code under seed-sampler/internal/seed-sampler-integration/*_stub.py is still stub-only—it does not create a real network connection.
+### USB Detection
+1. **PyUSB**: Direct USB library access (requires backend)
+2. **PowerShell**: Windows Get-PnpDevice cmdlet (primary method)
+3. **WMI**: Windows Management Instrumentation (fallback)
 
-for con you need to swap 
-network/device I/O would require replacing the stub transport code in seed-sampler/internal/seed-sampler-integration/*/guard_stub.py.
-So with the CLI you can choose the transport and route in the stub dispatcher, e.g.:
+### iOS Detection
+1. **irecovery**: Direct communication with iOS devices in recovery mode
+2. **Enhanced Apple Scan**: Multi-method Apple device detection
+3. **Device Manager Integration**: Windows device enumeration
 
+## Dependencies
 
+### Python Packages
+- pyusb: USB device access library
+- libusb1: USB backend for Windows
+- pywinusb: Windows-specific USB support
 
-`runner.py` drives an asyncio loop that:
+### iOS Recovery Tools
+- irecovery.exe: iOS recovery mode communication
+- libimobiledevice: iOS device management suite
+- Download from: [libimobiledevice-win32 releases](https://github.com/libimobiledevice-win32/imobiledevice-net/releases)
 
-1. Loads seeds from `tracker.json`.
-2. Spawns the kernel subprocess (C# if available, Python stub otherwise).
-3. For each seed, writes one JSONL event to the kernel's stdin.
-4. Reads one JSONL result per event from the kernel's stdout.
-5. Merges results into `tracker.seeds[i].kernel` and rewrites `tracker.json`.
+## Project Structure
 
-The kernel derives a base36 alphanumeric key from the seed value's binary
-form. It runs continuously until stdin is closed.
+```
+├── src/
+│   ├── usb_scanner.py           # Enhanced USB scanner with iOS support
+│   ├── ios_recovery_manager.py  # iOS recovery management
+│   ├── ipad_finder.py           # iPad-specific device finder
+│   ├── target_ipad.py           # iPad targeting utility
+│   └── auto_boot_fixer.py       # Auto-boot issue resolver
+├── fix_auto_boot.py             # Simple auto-boot fixer (main tool)
+├── FIX_AUTOBOOT.bat            # Windows batch file for easy access
+├── setup_ios_tools.py           # Setup and verification script
+├── irecovery.exe               # iOS recovery tool (download required)
+├── requirements.txt            # Python dependencies
+└── README.md                   # This file
+```
+
+## Troubleshooting
+
+### iOS Device Not Detected
+1. Ensure device is in recovery mode (connect + hold buttons)
+2. Check USB cable and port
+3. Verify irecovery.exe is present
+4. Run: `python setup_ios_tools.py`
+
+### Auto-Boot Fix Not Working
+1. Device must be in recovery mode (iBoot)
+2. Try different USB port/cable
+3. Ensure Windows recognizes the device
+4. Check Device Manager for Apple devices
+
+### "irecovery not found" Error
+1. Download libimobiledevice tools
+2. Extract irecovery.exe to project directory
+3. Verify with: `irecovery.exe -q`
