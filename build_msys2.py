@@ -3,6 +3,8 @@
 import os
 import subprocess
 
+cfg = PathConfig()
+
 def build_with_msys2():
     """Build using MSYS2"""
     source_dir = "1.0.0 source code\\libimobiledevice-idevicerestore-a88351d"

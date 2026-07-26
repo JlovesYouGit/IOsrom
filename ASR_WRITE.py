@@ -2,10 +2,14 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
-irecovery = chargfast / "irecovery.exe"
+irecovery = cfg.resolve_irecovery()
+
+cfg = PathConfig()
 
 def run(cmd):
     subprocess.run([str(irecovery), "-c", cmd], cwd=str(chargfast))
@@ -43,5 +47,5 @@ subprocess.run([
     str(chargfast / "idevicerestore.exe"),
     "--custom",
     "--erase", 
-    "N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw"
+    str(cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw")
 ], stdin=subprocess.PIPE, input=b"YES\n", cwd=str(chargfast))

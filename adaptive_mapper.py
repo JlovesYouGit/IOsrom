@@ -7,9 +7,11 @@ from pathlib import Path
 
 class AdaptiveHardwareMapper:
     def __init__(self):
-        self.base_dir = Path("N:/ROMLOADDER")
-        self.chargfast_dir = self.base_dir / "chargfast via usb"
-        self.irecovery = self.chargfast_dir / "irecovery.exe"
+        from utils import PathConfig
+        cfg = PathConfig()
+        self.base_dir = cfg.base_dir
+        self.chargfast_dir = cfg.chargfast_dir
+        self.irecovery = cfg.resolve_irecovery()
         
         # Hardware map - will be dynamically updated
         self.hardware_map = {
@@ -33,16 +35,34 @@ class AdaptiveHardwareMapper:
         """Get pwned iBEC control"""
         print("[+] Getting pwned control...")
         try:
-            subprocess.run([str(self.irecovery), "-f", "extracted/Firmware/dfu/iBSS.k48ap.RELEASE.dfu"], 
+            result = subprocess.run([str(self.irecovery), "-f", str(self.chargfast_dir / "extracted/Firmware/dfu/iBSS.k48ap.RELEASE.dfu")], 
                           cwd=str(self.chargfast_dir), timeout=10)
-            subprocess.run([str(self.irecovery), "-c", "go"], cwd=str(self.chargfast_dir))
+            if result.returncode != 0:
+                print(f"[-] iBSS load failed with return code {result.returncode}")
+                return False
+            result = subprocess.run([str(self.irecovery), "-c", "go"], cwd=str(self.chargfast_dir))
+            if result.returncode != 0:
+                print(f"[-] iBSS go failed with return code {result.returncode}")
+                return False
             time.sleep(2)
             
-            subprocess.run([str(self.irecovery), "-f", "extracted/Firmware/dfu/iBEC.k48ap.RELEASE.dfu"], 
+            result = subprocess.run([str(self.irecovery), "-f", str(self.chargfast_dir / "extracted/Firmware/dfu/iBEC.k48ap.RELEASE.dfu")], 
                           cwd=str(self.chargfast_dir), timeout=10)
-            subprocess.run([str(self.irecovery), "-c", "go"], cwd=str(self.chargfast_dir))
+            if result.returncode != 0:
+                print(f"[-] iBEC load failed with return code {result.returncode}")
+                return False
+            result = subprocess.run([str(self.irecovery), "-c", "go"], cwd=str(self.chargfast_dir))
+            if result.returncode != 0:
+                print(f"[-] iBEC go failed with return code {result.returncode}")
+                return False
             time.sleep(2)
             return True
+        except subprocess.TimeoutExpired as e:
+            print(f"[-] Control timeout: {e}")
+            return False
+        except FileNotFoundError as e:
+            print(f"[-] irecovery not found: {e}")
+            return False
         except Exception as e:
             print(f"[-] Control failed: {e}")
             return False
@@ -88,6 +108,10 @@ class AdaptiveHardwareMapper:
                     else:
                         print(f"    [+] READABLE: 0x{addr:08x} - Read only")
                         
+            except subprocess.TimeoutExpired:
+                pass  # Region not accessible
+            except FileNotFoundError:
+                pass  # irecovery not found
             except Exception as e:
                 pass  # Region not accessible
             
@@ -144,6 +168,10 @@ class AdaptiveHardwareMapper:
                     subprocess.run([str(self.irecovery), "-c", cmd], 
                                   cwd=str(self.chargfast_dir), timeout=5)
                     time.sleep(0.1)
+                except subprocess.TimeoutExpired:
+                    print(f"    [-] Failed: timeout")
+                except FileNotFoundError:
+                    print(f"    [-] Failed: irecovery not found")
                 except Exception as e:
                     print(f"    [-] Failed: {e}")
         
@@ -192,6 +220,10 @@ class AdaptiveHardwareMapper:
                     print(f"[+] PERSIST: {cmd}")
                     subprocess.run([str(self.irecovery), "-c", cmd], 
                                   cwd=str(self.chargfast_dir), timeout=5)
+                except subprocess.TimeoutExpired:
+                    print(f"[-] Persistence failed: timeout")
+                except FileNotFoundError:
+                    print(f"[-] Persistence failed: irecovery not found")
                 except Exception as e:
                     print(f"[-] Persistence failed: {e}")
         
@@ -205,10 +237,16 @@ class AdaptiveHardwareMapper:
         
         for cmd in boot_cmds:
             try:
-                subprocess.run([str(self.irecovery), "-c", cmd], 
+                result = subprocess.run([str(self.irecovery), "-c", cmd], 
                               cwd=str(self.chargfast_dir), timeout=5)
-            except:
-                pass
+                if result.returncode != 0:
+                    print(f"    [-] Boot command failed: {cmd}")
+            except subprocess.TimeoutExpired:
+                print(f"    [-] Boot command timeout: {cmd}")
+            except FileNotFoundError:
+                print(f"    [-] irecovery not found")
+            except Exception as e:
+                print(f"    [-] Error: {e}")
     
     def display_map(self):
         """Display the hardware map"""
@@ -257,10 +295,16 @@ def main():
         
         # Final boot
         try:
-            subprocess.run([str(mapper.irecovery), "-c", "reset"], 
+            result = subprocess.run([str(mapper.irecovery), "-c", "reset"], 
                           cwd=str(mapper.chargfast_dir), timeout=5)
-        except:
-            pass
+            if result.returncode != 0:
+                print(f"[-] Reset failed with return code {result.returncode}")
+        except subprocess.TimeoutExpired:
+            print(f"[-] Reset timeout")
+        except FileNotFoundError:
+            print(f"[-] irecovery not found")
+        except Exception as e:
+            print(f"[-] Error: {e}")
         
         print("\n🎉 ADAPTIVE MAPPING COMPLETE")
         print("Device precisely mapped and exploited")

@@ -4,12 +4,16 @@ import subprocess
 import time
 import sys
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def hijack_bootloop():
     """Catch device in bootloop and inject ROM"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("🔥 BOOTLOOP HIJACKER")
     print("=" * 20)
@@ -42,13 +46,13 @@ def hijack_bootloop():
                         print(f"  ⚡ {desc}...")
                         subprocess.run(cmd, timeout=3)
                         time.sleep(0.1)  # Minimal delay
-                    except:
+                    except Exception as e:
                         pass  # Keep trying
                 
                 print("✅ Injection complete!")
                 return True
                 
-        except:
+        except Exception as e:
             pass
         
         time.sleep(1)
@@ -64,9 +68,9 @@ def continuous_hijack():
     print("Press Ctrl+C to stop")
     print()
     
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     try:
         while True:
@@ -97,12 +101,12 @@ def continuous_hijack():
                                     str(irecovery), "-c", "bootx"
                                 ], timeout=1)
                                 break
-                            except:
+                            except Exception as e:
                                 continue
                     
                     time.sleep(5)  # Wait for boot attempt
                 
-            except:
+            except Exception as e:
                 pass
             
             time.sleep(0.5)  # Fast polling

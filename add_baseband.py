@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def add_baseband(ios4_ipsw, stealth_ipsw, output_ipsw):
     """Add iOS 4.3.3 baseband to stealth IPSW"""
     temp_ios4 = "temp_ios4_bb"
@@ -71,7 +73,7 @@ def add_baseband(ios4_ipsw, stealth_ipsw, output_ipsw):
             if os.path.exists(temp_dir):
                 try:
                     shutil.rmtree(temp_dir)
-                except:
+                except Exception as e:
                     pass
 
 if __name__ == "__main__":

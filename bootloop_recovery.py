@@ -3,12 +3,16 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def recover_bootloop():
     """Recover from bootloop caused by silicon burns"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("🚑 BOOTLOOP RECOVERY")
     print("Fixing silicon burn damage")
@@ -77,7 +81,7 @@ def recover_bootloop():
         print(f"[+] Recovery: {cmd}")
         try:
             subprocess.run([str(irecovery), "-c", cmd], cwd=str(chargfast_dir), timeout=5)
-        except:
+        except Exception as e:
             pass
         time.sleep(0.5)
 

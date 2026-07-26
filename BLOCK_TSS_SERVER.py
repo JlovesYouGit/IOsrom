@@ -2,6 +2,8 @@
 """Block TSS server and force local restore"""
 import subprocess
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
 hosts_file = Path("C:/Windows/System32/drivers/etc/hosts")
 

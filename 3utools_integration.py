@@ -8,10 +8,14 @@ import sys
 import subprocess
 import json
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 class ThreeUToolsIntegration:
     def __init__(self):
-        self.base_dir = Path("N:/ROMLOADDER")
+        self.base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
         self.available_roms = self.scan_available_roms()
         
     def scan_available_roms(self):
@@ -127,7 +131,7 @@ class ThreeUToolsIntegration:
         print(f"\n🔧 Flashing Unsigned Kernel via USB")
         print("=" * 40)
         
-        irecovery_exe = self.base_dir / "chargfast via usb" / "irecovery.exe"
+        irecovery_exe = self.cfg.resolve_irecovery()
         
         if not irecovery_exe.exists():
             print("❌ irecovery.exe not found")
@@ -170,7 +174,7 @@ class ThreeUToolsIntegration:
         print("\n🧪 Testing NAND Bypass Functionality")
         print("=" * 40)
         
-        irecovery_exe = self.base_dir / "chargfast via usb" / "irecovery.exe"
+        irecovery_exe = self.cfg.resolve_irecovery()
         
         if not irecovery_exe.exists():
             print("❌ irecovery.exe not found for testing")

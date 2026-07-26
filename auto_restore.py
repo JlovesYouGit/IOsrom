@@ -2,11 +2,13 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast_dir = Path("N:/ROMLOADDER/chargfast via usb")
-irecovery = chargfast_dir / "irecovery.exe"
+chargfast_dir = Path(str(Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER")) / "chargfast via usb"))
+irecovery = cfg.resolve_irecovery()
 idevicerestore = chargfast_dir / "idevicerestore.exe"
-ipsw = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
+ipsw = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
 
 print("AUTO RESTORE")
 

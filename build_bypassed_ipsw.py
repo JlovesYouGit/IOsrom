@@ -4,10 +4,14 @@ import os
 import shutil
 import zipfile
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def build_bypassed_ipsw():
     """Build IPSW that works with bypassed NAND"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     
     # Use the Perfect IPSW as base (likely pre-configured)
     source_ipsw = base_dir / "iPad1,1_Perfect.ipsw"

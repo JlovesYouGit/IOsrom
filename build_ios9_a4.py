@@ -6,6 +6,8 @@ import subprocess
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 class iOS9A4Builder:
     def __init__(self):
         self.work_dir = "ios9_a4_build"

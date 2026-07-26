@@ -4,6 +4,8 @@ import os
 import subprocess
 import shutil
 
+cfg = PathConfig()
+
 def build_windows():
     """Build idevicerestore for Windows"""
     source_dir = "1.0.0 source code\\libimobiledevice-idevicerestore-a88351d"

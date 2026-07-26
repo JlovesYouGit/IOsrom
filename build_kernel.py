@@ -4,6 +4,8 @@ import os
 import subprocess
 import sys
 
+cfg = PathConfig()
+
 def build_xnu_kernel():
     """Build the patched XNU kernel for A4"""
     kernel_dir = r"xnu-master\xnu-master"
