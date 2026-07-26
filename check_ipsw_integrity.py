@@ -4,6 +4,8 @@ import zipfile
 import os
 import sys
 
+cfg = PathConfig()
+
 def check_ipsw(ipsw_path):
     """Verify IPSW integrity and required components"""
     try:

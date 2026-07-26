@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def extract_and_edit_ios4(ios4_ipsw, output_dir):
     """Extract iOS 4.3.3 and prepare for code editing"""
     

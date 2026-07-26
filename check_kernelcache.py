@@ -5,6 +5,8 @@ import struct
 import sys
 import os
 
+cfg = PathConfig()
+
 def check_kernelcache(ipsw_path):
     """Analyze kernelcache structure"""
     try:

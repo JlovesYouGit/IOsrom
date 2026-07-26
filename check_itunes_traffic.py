@@ -4,6 +4,8 @@ import subprocess
 import sys
 import time
 
+cfg = PathConfig()
+
 def monitor_itunes_traffic():
     """Monitor network traffic to see what iTunes is doing"""
     print("[+] Monitoring iTunes network traffic...")

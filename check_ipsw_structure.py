@@ -3,10 +3,14 @@
 import os
 import zipfile
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def check_ipsw_structure():
     """Check IPSW internal structure"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     ipsw_file = base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
     
     if not ipsw_file.exists():

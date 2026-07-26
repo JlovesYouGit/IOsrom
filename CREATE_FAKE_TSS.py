@@ -3,9 +3,11 @@
 import subprocess
 import plistlib
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
-irecovery = chargfast / "irecovery.exe"
+chargfast = cfg.chargfast_dir
+irecovery = cfg.resolve_irecovery()
 
 # Get NONCE
 result = subprocess.run([str(irecovery), "-q"], capture_output=True, text=True, cwd=str(chargfast))
@@ -24,7 +26,7 @@ subprocess.run([str(irecovery), "-c", f"setenv boot-nonce {nonce}"], cwd=str(cha
 subprocess.run([str(irecovery), "-c", "saveenv"], cwd=str(chargfast))
 
 # Create fake SHSH blob
-shsh_dir = Path("N:/ROMLOADDER/shsh")
+shsh_dir = cfg.base_dir / "shsh"
 shsh_dir.mkdir(exist_ok=True)
 
 shsh_file = shsh_dir / f"{int(ecid, 16)}-iPad1,1-4.3.3.shsh"

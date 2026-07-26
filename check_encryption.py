@@ -3,6 +3,8 @@
 import zipfile
 import sys
 
+cfg = PathConfig()
+
 def check_encryption(ipsw_path):
     """Check kernelcache encryption status"""
     try:

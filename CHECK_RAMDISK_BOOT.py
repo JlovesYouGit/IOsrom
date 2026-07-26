@@ -2,9 +2,11 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
-irecovery = chargfast / "irecovery.exe"
+chargfast = cfg.chargfast_dir
+irecovery = cfg.resolve_irecovery()
 
 print("[+] Waiting 30s for ramdisk boot...")
 time.sleep(30)

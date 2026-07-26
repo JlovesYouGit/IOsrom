@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def create_hybrid_ipsw(ipad1_ipsw, ipad2_ipsw, output_ipsw):
     """Create hybrid IPSW using iPad1,1 base with patched iPad2,1 components"""
     temp_base = "temp_base"

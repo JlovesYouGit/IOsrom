@@ -4,9 +4,13 @@ import os
 import sys
 import shutil
 import zipfile
+import struct
 from img3tool import IMG3Tool
 from lzss_tool import decompress_lzss
 from kernelcache_a4_patcher import KernelPatcher
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def create_frankenstein_ipsw(ios4_ipsw, ios9_ipsw, output_ipsw):
     """Create Frankenstein IPSW mixing iOS 4 and iOS 9"""
@@ -157,11 +161,11 @@ def create_frankenstein_ipsw(ios4_ipsw, ios9_ipsw, output_ipsw):
             if os.path.exists(temp_dir):
                 try:
                     shutil.rmtree(temp_dir)
-                except:
+                except Exception as e:
                     time.sleep(1)
                     try:
                         shutil.rmtree(temp_dir)
-                    except:
+                    except Exception as e:
                         pass
 
 if __name__ == "__main__":
@@ -169,6 +173,5 @@ if __name__ == "__main__":
         print("Usage: python create_frankenstein.py <ios4.ipsw> <ios9.ipsw> <output.ipsw>")
         sys.exit(1)
     
-    import struct
     success = create_frankenstein_ipsw(sys.argv[1], sys.argv[2], sys.argv[3])
     sys.exit(0 if success else 1)
