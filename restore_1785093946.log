@@ -1,0 +1,3 @@
+15:25:46.590    <Info> idevicerestore 1.0.0-git-45145e9 (libirecovery 1.3.1, libtatsu 1.0.5)
+15:25:46.590   <Error> zip_open: /home/j/Downloads/ios romm/firmware/iPhone18,5_26.5.2_23F84_Restore.ipsw: 35
+15:25:46.590   <Error> Firmware file /home/j/Downloads/ios romm/firmware/iPhone18,5_26.5.2_23F84_Restore.ipsw cannot be opened.

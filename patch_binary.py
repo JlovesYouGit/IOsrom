@@ -2,6 +2,8 @@
 """Patch Linux binary for Windows (basic header fix)"""
 import os
 
+cfg = PathConfig()
+
 def patch_elf_to_pe():
     """Attempt basic ELF to PE conversion"""
     linux_binary = "git-hash_2025-09-30-2a7836e\\Legacy-iOS-Kit-latest\\Legacy-iOS-Kit-latest\\bin\\linux\\x86_64\\idevicerestore"

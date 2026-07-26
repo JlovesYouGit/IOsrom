@@ -4,6 +4,8 @@ import struct
 import sys
 import os
 
+cfg = PathConfig()
+
 def rebuild_img3(payload_path, original_img3, output_path):
     """Rebuild IMG3 with new payload but preserve structure"""
     try:

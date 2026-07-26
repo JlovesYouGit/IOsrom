@@ -7,6 +7,8 @@ import zipfile
 import struct
 import hashlib
 
+cfg = PathConfig()
+
 def perfect_stealth(ios4_ipsw, ios9_ipsw, output_ipsw):
     """Create perfect stealth IPSW that passes all sn0wbreeze checks"""
     

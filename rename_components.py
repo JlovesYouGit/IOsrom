@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def rename_firmware_components(ipsw_path, output_path):
     """Rename all firmware components from A5 to A4 naming"""
     temp_dir = "temp_rename"

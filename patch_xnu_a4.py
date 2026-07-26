@@ -4,6 +4,8 @@ import os
 import sys
 import shutil
 
+cfg = PathConfig()
+
 def patch_a4_platform():
     """Add A4 platform support to XNU"""
     platform_file = r"xnu-master\xnu-master\pexpert\pexpert\arm\board_config.h"

@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def create_simple_hybrid(ipad1_ipsw, output_ipsw):
     """Create simple hybrid keeping iPad1,1 kernelcache intact"""
     temp_dir = "temp_simple"

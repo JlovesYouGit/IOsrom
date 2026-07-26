@@ -4,6 +4,8 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import plistlib
 import hashlib
 
+cfg = PathConfig()
+
 class TSSHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])

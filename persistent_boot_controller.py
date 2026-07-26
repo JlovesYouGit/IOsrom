@@ -5,12 +5,16 @@ import time
 import threading
 import json
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 class PersistentBootController:
     def __init__(self):
-        self.base_dir = Path("N:/ROMLOADDER")
+        self.base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
         self.chargfast_dir = self.base_dir / "chargfast via usb"
-        self.irecovery = self.chargfast_dir / "irecovery.exe"
+        self.irecovery = cfg.resolve_irecovery()
         
         self.connection_active = False
         self.boot_successful = False
@@ -77,7 +81,7 @@ class PersistentBootController:
             try:
                 subprocess.run([str(self.irecovery), "-c", cmd], 
                               cwd=str(self.chargfast_dir), timeout=2)
-            except:
+            except Exception as e:
                 pass
     
     def recover_connection(self):
@@ -100,7 +104,7 @@ class PersistentBootController:
                 if result and result.returncode == 0:
                     print("[+] Connection recovered")
                     return True
-            except:
+            except Exception as e:
                 pass
         
         return False
@@ -119,7 +123,7 @@ class PersistentBootController:
                 if method():
                     print("[+] HOME SCREEN REACHED!")
                     return True
-            except:
+            except Exception as e:
                 pass
         
         return False
@@ -138,7 +142,7 @@ class PersistentBootController:
                     if (device.get("vendor_id") == "0x05AC" and 
                         device.get("product_id") != "0x1281"):  # Not recovery mode
                         return True
-        except:
+        except Exception as e:
             pass
         return False
     
@@ -151,7 +155,7 @@ class PersistentBootController:
             ], capture_output=True, text=True, timeout=5, cwd=str(self.chargfast_dir))
             
             return result.returncode == 0 and "DeviceName" in result.stdout
-        except:
+        except Exception as e:
             return False
     
     def check_via_itunes_detection(self):
@@ -164,7 +168,7 @@ class PersistentBootController:
             ], capture_output=True, text=True, timeout=5)
             
             return result.returncode == 0 and "Apple" in result.stdout
-        except:
+        except Exception as e:
             return False
     
     def exploit_boot_vulnerabilities(self):
@@ -219,7 +223,7 @@ class PersistentBootController:
             subprocess.run([str(self.irecovery), "-c", "go"], cwd=str(self.chargfast_dir))
             time.sleep(2)
             return True
-        except:
+        except Exception as e:
             return False
     
     def flash_persistent_os(self):

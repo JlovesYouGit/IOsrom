@@ -2,10 +2,12 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
-irecovery = chargfast / "irecovery.exe"
+irecovery = cfg.resolve_irecovery()
 
 print("[+] Loading ramdisk from Recovery mode...")
 subprocess.run([str(irecovery), "-f", str(extracted / "038-1449-004.dmg")], cwd=str(chargfast))

@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def create_simple_frankenstein(ios4_ipsw, output_ipsw):
     """Create simple frankenstein keeping iOS 4 structure intact"""
     temp_dir = "temp_simple_frank"

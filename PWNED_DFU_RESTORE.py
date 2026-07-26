@@ -3,10 +3,12 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
-irecovery = chargfast / "irecovery.exe"
+irecovery = cfg.resolve_irecovery()
 idevicerestore = chargfast / "idevicerestore.exe"
 
 print("[1] Put device in DFU mode manually")
@@ -25,7 +27,7 @@ proc = subprocess.Popen([
     str(idevicerestore),
     "--pwn",
     "--erase",
-    "N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw"
+    str(cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw")
 ], stdin=subprocess.PIPE, cwd=str(chargfast), text=True)
 
 proc.communicate(input="YES\n")

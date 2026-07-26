@@ -3,10 +3,14 @@
 import subprocess
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def proper_nand_write():
     """Use idevicerestore properly to write to NAND"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
     idevicerestore = chargfast_dir / "idevicerestore.exe"
     ipsw = base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"

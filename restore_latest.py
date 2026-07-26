@@ -5,6 +5,8 @@ import glob
 import subprocess
 import sys
 
+cfg = PathConfig()
+
 def main():
     """Restore device with the most recent IPSW"""
     

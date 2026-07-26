@@ -5,6 +5,8 @@ import sys
 from extract_all import extract_firmware
 from kernelcache_a4_patcher import KernelPatcher
 
+cfg = PathConfig()
+
 def main():
     if len(sys.argv) != 2:
         print("Usage: python run_extraction.py <ipsw_file>")

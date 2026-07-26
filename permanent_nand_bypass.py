@@ -10,10 +10,14 @@ import subprocess
 import time
 import shutil
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 class PermanentNANDBypass:
     def __init__(self):
-        self.base_dir = Path("N:/ROMLOADDER")
+        self.base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
         self.chargfast_dir = self.base_dir / "chargfast via usb"
         self.limera1n_dir = self.base_dir / "limera1n"
         self.sn0wbreeze_dir = self.base_dir / "Snowbreeze"

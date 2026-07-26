@@ -3,13 +3,15 @@ import subprocess
 import gzip
 import shutil
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 
-chargfast = Path("N:/ROMLOADDER/chargfast via usb")
+chargfast = cfg.chargfast_dir
 extracted = chargfast / "extracted"
 
 # Extract ASR binary from restore ramdisk
 ramdisk = extracted / "038-1437-004.dmg"
-output_dir = Path("N:/ROMLOADDER/asr_extracted")
+output_dir = cfg.base_dir / "asr_extracted"
 output_dir.mkdir(exist_ok=True)
 
 print("[+] Extracting restore ramdisk...")

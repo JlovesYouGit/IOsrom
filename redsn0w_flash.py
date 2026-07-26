@@ -4,6 +4,8 @@ import os
 import sys
 import subprocess
 
+cfg = PathConfig()
+
 def flash_with_redsn0w(ipsw_path):
     """Flash IPSW using redsn0w"""
     redsn0w_dir = "redsn0w"

@@ -4,6 +4,8 @@ import os
 import sys
 import subprocess
 
+cfg = PathConfig()
+
 def flash_with_sn0wbreeze(ipsw_path):
     """Flash IPSW using sn0wbreeze"""
     sn0wbreeze_dir = "Snowbreeze"

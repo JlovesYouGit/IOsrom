@@ -5,6 +5,8 @@ import sys
 import shutil
 import zipfile
 
+cfg = PathConfig()
+
 def rebuild_ipsw_clean(source_ipsw, output_ipsw):
     """Rebuild IPSW with minimal changes to avoid corruption"""
     temp_dir = "temp_rebuild"

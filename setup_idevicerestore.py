@@ -6,6 +6,8 @@ import urllib.request
 import zipfile
 import shutil
 
+cfg = PathConfig()
+
 def download_idevicerestore():
     """Download pre-built idevicerestore for Windows"""
     

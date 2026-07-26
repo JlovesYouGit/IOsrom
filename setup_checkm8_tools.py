@@ -4,6 +4,8 @@ import os
 import subprocess
 import sys
 
+cfg = PathConfig()
+
 def setup_tools():
     """Clone required tools"""
     # Clean up dead folder

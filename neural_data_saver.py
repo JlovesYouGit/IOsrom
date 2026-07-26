@@ -4,12 +4,16 @@ import numpy as np
 import json
 import pickle
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
 import time
+
+cfg = PathConfig()
 
 class NeuralDataManager:
     def __init__(self, ai_instance):
         self.ai = ai_instance
-        self.data_dir = Path("N:/ROMLOADDER/ai_data")
+        self.data_dir = cfg.base_dir / "ai_data"
         self.data_dir.mkdir(exist_ok=True)
         
         self.weights_file = self.data_dir / "neural_weights.pkl"
@@ -114,7 +118,7 @@ class NeuralDataManager:
             
             if "ECID:" in result.stdout:
                 return result.stdout.split("ECID:")[1].split()[0].strip()
-        except:
+        except Exception as e:
             pass
         return "unknown"
     

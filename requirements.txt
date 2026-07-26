@@ -1,1 +1,5 @@
-﻿# Standard library only. Kept for clarity; no third-party deps required.
+requests==2.31.0
+urllib3==1.26.18
+Pillow==10.1.0
+pyusb==1.2.3
+libusb1==1.8.2

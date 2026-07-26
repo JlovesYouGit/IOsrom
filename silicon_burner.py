@@ -4,12 +4,16 @@ import subprocess
 import struct
 import time
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def burn_silicon():
     """Burn permanent modifications into the A4 silicon"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("🔥 SILICON BURNER")
     print("PERMANENT HARDWARE MODIFICATION")
@@ -157,9 +161,9 @@ def burn_silicon():
 
 def nuclear_silicon_burn():
     """Nuclear option - burn everything permanently"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     chargfast_dir = base_dir / "chargfast via usb"
-    irecovery = chargfast_dir / "irecovery.exe"
+    irecovery = cfg.resolve_irecovery()
     
     print("☢️  NUCLEAR SILICON BURN")
     print("PERMANENT IRREVERSIBLE HARDWARE MODIFICATION")

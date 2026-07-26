@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 import subprocess
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def restore_ipad():
-    chargfast_dir = Path("N:/ROMLOADDER/chargfast via usb")
-    rom_path = Path("N:/ROMLOADDER/iPad1,1_4.3.3_8J3_Restore.ipsw")
+    chargfast_dir = Path(str(Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER")) / "chargfast via usb"))
+    rom_path = cfg.base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
     
     idevicerestore = chargfast_dir / "idevicerestore.exe"
     

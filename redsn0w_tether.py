@@ -3,10 +3,14 @@
 import subprocess
 import os
 from pathlib import Path
+from utils import PathConfig
+from utils import PathConfig
+
+cfg = PathConfig()
 
 def launch_redsn0w():
     """Launch redsn0w for tethered boot"""
-    base_dir = Path("N:/ROMLOADDER")
+    base_dir = Path(os.environ.get("IOS_TOOLS_BASE", "N:/ROMLOADDER"))
     redsn0w_exe = base_dir / "redSn0w" / "redsn0w-win_0.1" / "redsn0w" / "redsn0w.exe"
     ipsw_path = base_dir / "iPad1,1_4.3.3_8J3_Restore.ipsw"
     
@@ -27,7 +31,7 @@ def launch_redsn0w():
             "Stop-Service 'Apple Mobile Device Service' -Force"
         ], check=False)
         print("✅ Service stopped")
-    except:
+    except Exception as e:
         print("⚠️  Service stop failed (may not be running)")
     
     print(f"\n🔧 Launching redsn0w...")
