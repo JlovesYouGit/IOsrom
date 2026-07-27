@@ -366,6 +366,8 @@ https://github.com/JlovesYouGit/SeedGate.git
 ios device model vemex
 for other version supports all ios devices needs to be connected to main apple server 
 all ipsw mac os ios files supported all nands all A series chipset and droid snap dragon and mediatek via transaltion vemex layers silicone valley
-researchers https://share.google/iuFIg2CJitpW53aQa
+researchers <img width="500" height="333" alt="image" src="https://github.com/user-attachments/assets/f81efdaa-e5e8-47b5-8559-efc22dee3705" />
+
+<img width="860" height="212" alt="image" src="https://github.com/user-attachments/assets/b838b278-cb8f-4fe5-826c-37fec50ee368" />
 
 
