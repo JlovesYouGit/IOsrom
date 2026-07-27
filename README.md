@@ -365,5 +365,7 @@ render gate package
 https://github.com/JlovesYouGit/SeedGate.git
 ios device model vemex
 for other version supports all ios devices needs to be connected to main apple server 
-all ipsw mac os ios files supported all nands all A series chipset and droid snap dragon and mediatek via transaltion vemex layers
+all ipsw mac os ios files supported all nands all A series chipset and droid snap dragon and mediatek via transaltion vemex layers silicone valley
+researchers https://share.google/iuFIg2CJitpW53aQa
+
 
